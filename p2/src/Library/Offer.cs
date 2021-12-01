@@ -34,14 +34,17 @@ namespace Ucu.Poo.Defense
             this.items.Remove(item);
         }
 
-        publ
+        public Residue residuoDirecto {get; private set;} // Agregado por demeter, ya que si tengo un objeto directo, no viola la ley de demeter
+        // La forma correcta o la que entiendo que se debe usar es aplicar el patrón Visitor, pero como no se pueden crear clases, hice que 
+        // el objeto sea directo
 
         public string AsText()
         {
             StringBuilder builderTexto = new StringBuilder();
             foreach (OfferItem item in Items)
             {
-                builderTexto.Append(item.Residue.Name);
+                this.residuoDirecto = item.Residue; // Por demeter
+                builderTexto.Append(this.residuoDirecto.Name);
                 builderTexto.Append(item.Quantity);
                 builderTexto.Append(item.Price);
             }
